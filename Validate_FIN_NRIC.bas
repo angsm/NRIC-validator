@@ -4,15 +4,17 @@ Sub Validate_FIN_NRIC()
     Dim isForeign     As Boolean
     Dim colArr
     Dim msgStore() As String
+    Dim startRow As Integer
     
     ReDim Preserve msgStore(0)
+    startRow = 28
     msgStore(0) = "Kindly check the invalid FIN/NRIC below"
     
     'Update columns that needs to be formatted
     colArr = Array("D")
     
     For Each col In colArr 'Iterate colArr letters
-        Range(col & 28).Select
+        Range(col & startRow).Select
         ' Set Do loop to stop when an empty cell is reached.
         Do Until IsEmpty(ActiveCell)
             
@@ -140,7 +142,7 @@ Function check_mod_11(ByVal last As String, ByVal numeric As Long, ByVal postfix
     total = 0
     count = 0
     
-    'Mod and divide until numeric is zero, which outputs birth year
+    'Mod and divide until numeric is zero
     Do Until (numeric = 0)
         total = total + (numeric Mod 10) * weights((UBound(weights) - LBound(weights) + 1) - (1 + count))
        
